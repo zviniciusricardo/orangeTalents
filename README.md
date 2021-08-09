@@ -1,5 +1,5 @@
-# Orange Talents
-<b>turma 8</b><i> - (ao infinito e além)</i>
+# Orange Talents <b>turma 8</b><i>
+### <i>(ao infinito e além)</i>
 
 ## Considerações iniciais:
 
