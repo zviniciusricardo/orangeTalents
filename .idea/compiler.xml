@@ -6,7 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="orangetalents" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="orangetalents" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

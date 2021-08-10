@@ -1,4 +1,4 @@
-# Orange Talents <b>turma 8</b><i>
+# Orange Talents 8
 ### <i>(ao infinito e além)</i>
 
 ## Considerações iniciais:
