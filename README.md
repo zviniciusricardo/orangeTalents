@@ -1,5 +1,4 @@
-# Orange Talents 8
-### <i>(ao infinito e além)</i>
+# Orange Talents 8\# <i>(ao infinito e além)</i>
 
 ## Considerações iniciais:
 
@@ -82,6 +81,14 @@ ___________________________________________________________________________
 ### Fase 2
 
 1- Java Servlet: Fundamentos da programação web Java				10h
+
+Servlet é uma especificação Java.
+Cada especificação no java possui um arquivo de configuração xml correspondente.
+        
+    ex: persistence.xml, web.xmml, etc.
+
+
+
 
 2- HTTP: Entendendo a web por baixo dos panos						14h
 
