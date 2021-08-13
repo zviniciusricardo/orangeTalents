@@ -18,7 +18,7 @@ public class NewCompanyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String companyName = request.getParameter("name");
 		PrintWriter out = response.getWriter();
-		out.println("<html><body>Request " + companyName + " realizada com sucesso</body></html>");
+		out.println("<html><body>Request " + companyName + " done successfully</body></html>");
 		System.out.println("Query GET company");
 	}
 	
@@ -32,7 +32,7 @@ public class NewCompanyServlet extends HttpServlet {
 		var company = new Company();
 		company.setName(companyName);
 		
-		Database db = new Database();
+		FakeDatabase db = new FakeDatabase();
 		db.add(company);
 		
 		PrintWriter out = response.getWriter();
