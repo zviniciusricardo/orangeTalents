@@ -81,7 +81,7 @@ ___________________________________________________________________________
 
 ### Fase 2
 
-1- Java Servlet: Fundamentos da programação web Java				10h
+[1- Java Servlet: Fundamentos da programação web Java!](https://github.com/zviniciusricardo/orangeTalents/tree/main/curso1_servlets "Java EE com Eclipse e servlets")				10h
 
 2- HTTP: Entendendo a web por baixo dos panos						14h
 
