@@ -158,18 +158,18 @@ response.getWriter() --> responde (printa) no browser a resposta do servidor par
 
 #### Observações checkIn OT (@Paula Macedo)
 
-1- Se você tiver usando o Eclipse, ao deletar um projeto ou server pode ser que ele ainda permaneça 
-na pasta Workspace e então ao criar um projeto com o mesmo nome ou servidor ele pegue as mesmas 
-configurações do que esta na pasta e você ache estranho que seu projeto ou servidor não mudou . 
-Então não esqueçam de deletar da pasta/ workspace.
+		1- Se você tiver usando o Eclipse, ao deletar um projeto ou server pode ser que ele ainda permaneça 
+		na pasta Workspace e então ao criar um projeto com o mesmo nome ou servidor ele pegue as mesmas 
+		configurações do que esta na pasta e você ache estranho que seu projeto ou servidor não mudou . 
+		Então não esqueçam de deletar da pasta/ workspace.
 
-2- Se vocês decidirem não usar o workspace e usar um diretório diferente, para importar o projeto 
-o caminho é File> import > existing projects into workspace e escolham sua pasta.
+		2- Se vocês decidirem não usar o workspace e usar um diretório diferente, para importar o projeto 
+		o caminho é File> import > existing projects into workspace e escolham sua pasta.
 
-3- A versão mais atual do Tomcat ainda esta em teste então o melhor mesmo é usar o TomCat 9 e a
-versão da Jstl não precisa ser a citada pelo professor no curso, use uma versão compatível com o
-Tomcat 9 , pode ser a do Jakarta EE também, mas lembrando que o caminho dos imports mudaram nas 
-versões do Jakarta EE.
+		3- A versão mais atual do Tomcat ainda esta em teste então o melhor mesmo é usar o TomCat 9 e a
+		versão da Jstl não precisa ser a citada pelo professor no curso, use uma versão compatível com o
+		Tomcat 9 , pode ser a do Jakarta EE também, mas lembrando que o caminho dos imports mudaram nas 
+		versões do Jakarta EE.
 
 
 #### Observações Antonio Martins
