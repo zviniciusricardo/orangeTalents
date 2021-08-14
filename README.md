@@ -209,7 +209,7 @@ obs: quem instancia o objeto é o server tomcat
 * O RequestDispatcher delega o fluxo da requisição para qualquer recurso disponível.
 * Pode chamar qualquer recurso acessível pela URL (uma página HTML, CSS, JavaScript, Servlet ou JSP).
 
-### Considerações finais:
+### Considerações finais sobre scriptlets:
 
 * JSP significa Java Server Pages
 * JSP é uma página automaticamente processada pelo Tomcat
@@ -220,6 +220,39 @@ obs: quem instancia o objeto é o server tomcat
 * Obtemos o RequestDispatcher a partir do HttpServletRequest
 * Usamos a requisição para colocar ou pegar um atributo (setAttribute(.., ..) ou getAttribute(..))
 
+### Problemas com scriplets
+
+* Quando o html é muito grande, a manutenção se torna inviável
+* Desse problema surge a sintaxe ${ } chamada expression language
+* Ela procura dentro das requisições e procura pelo nome declarado dentro dela
+	ex: ${ myVariable }
+* Simplificando a sintaxe de scriplet <% %> por ${ }
+	obs: não dá pra fazer laço for dentro dessa expression language
+
+### Soluções
+
+Baixar a biblioteca JSTL (jstl.jar) Apache Standard Taglib
+Copiar a biblioteca e colar dentro da pasta WEB-INF/lib
+Fazer um import <%@ taglib <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> no header
+
+		items = variável definada em setAttribute do servlet
+		var = variável definida para o for loop
+		
+JSTL (Java Standarfd Tag Library)
+ * core - controle de fluxo
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+
+ * fmt - formatação/i18n (internacionalização de datas, numeros, etc)
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt"%>
+
+ * sql - executar SQL
+ 
+ * xml - gerar XML
+ 
+ 
+### Context Root
+
+Escrever o nome do contexto no arquivo JSP não é uma boa prática, uma vez que ele pode variar e gerar problemas em outras páginas. Para lidarmos com esse fluxo dinâmico, usaremos a biblioteca Taglib, mais especificamente, a tag <c:url />. Nela, inseriremos o atributo value, e, em seguida, iremos inserir um único caminho possível para chegar até o Servlet.
 ______________________________________________________________
 
 2- HTTP: Entendendo a web por baixo dos panos						14h
