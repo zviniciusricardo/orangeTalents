@@ -27,7 +27,8 @@ public class NewCompanyServlet extends HttpServlet {
 		db.add(company);
 		
 		PrintWriter out = response.getWriter();
-		out.println("<html><body>Empresa " + companyName + " cadastrada com sucesso</body></html>");
+		out.println("<html><body>Empresa " + companyName + 
+				" cadastrada com sucesso</body></html>");
 		
 		
 	}
