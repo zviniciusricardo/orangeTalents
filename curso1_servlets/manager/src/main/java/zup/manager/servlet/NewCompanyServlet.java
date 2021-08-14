@@ -14,15 +14,6 @@ public class NewCompanyServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String companyName = request.getParameter("name");
-		PrintWriter out = response.getWriter();
-		out.println("<html><body>Request " + companyName + " done successfully</body></html>");
-		System.out.println("Query GET company");
-	}
-	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		

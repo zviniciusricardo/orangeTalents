@@ -5,14 +5,14 @@ import java.util.List;
 
 public class FakeDatabase {
 	
-	private static List<Company> list = new ArrayList<>();
+	private static List<Company> companiesList = new ArrayList<>();
 	
 	public void add(Company company) {
-		FakeDatabase.list.add(company);
+		FakeDatabase.companiesList.add(company);
 	}
 	
 	public List<Company> getCompanies() {
-		return FakeDatabase.list;
+		return FakeDatabase.companiesList;
 	}
 
 }
