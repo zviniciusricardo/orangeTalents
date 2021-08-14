@@ -83,6 +83,145 @@ ___________________________________________________________________________
 
 [1- Java Servlet: Fundamentos da programação web Java!](https://github.com/zviniciusricardo/orangeTalents/tree/main/curso1_servlets "Java EE com Eclipse e servlets")				10h
 
+#### Primeiros passos
+
+1) A partir do Eclipse IDE, criar um Dinamic Web Project
+2) Fazer download do servidor Tomcat
+3) Na página inicial da IDE, crie um novo projeto com o nome gerenciador
+4) configurações:
+Tomcat 9, JRE default (do sistema) e arquivo web.xml
+5) No diretório webapp irão arquivos estáticos (páginas html e recursos como jpg, png, videos, etc)
+6) Dentro de gerenciador/src/main/java irão nossas classes (context root)
+7) Configurar o projeto para que ele reconheça o Tomcat - definir a pasta onde o Tomcat está e algumas
+configurações
+
+
+#### Criando servlets
+
+1) Criar uma classe que extends HttpServlet
+2) Anotation @WebServlet(urlPatterns="/meu-endpoint")
+3) Usar a classe PrintWriter (Java I/O) para gerar html dinamicamente.
+4) usar o método .getWriter() da Classe PrintWriter para capturar o html gerado por nós
+de maneira estática ou dinâmica.
+5) Usar o prinln para mostrar a mensagem capturada no browser
+
+#### Estrutura de requisições http	
+
+		protocolo://ip:porta/contexto/recurso
+
+
+MONTANDO UMA REQUISIÇÃO DO TIPO POST MANUALMENTE
+
+		http://localhost:8080/gerenciador/novaEmpresa?nome=Alura
+		
+				context root + endpoint + service parameter + type + parameter
+						
+### Métodos HttpServlet
+
+request.getParameter("nome") --> obtém o parâmetro digitado na url pelo user
+response.getWriter() --> responde (printa) no browser a resposta do servidor para o usuário
+
+		obs: Alternativa correta! O método req.getParameter(..) sempre retorna uma string e recebe
+		como parâmetro o nome do parâmetro recebido na requisição.
+		
+		
+#### Porq o dispatcher deve ser pela request e não pela response?
+
+		Mantém o fluxo http --> mais barato --> continua dentro de servidor e é redirecionamento.
+
+
+		requestDispatcher --> é um pedido a partir do pedido do HTTP request.
+		sobrescrita de método só com herança
+		O Dispatcher é um objeto --> adquire através do request q é do tipo HttpServletRequest
+		método do tipo response = sendRedirect
+
+
+#### observações da Alana:
+
+		Servlet -> 	o nome do inglês significa um servidor(serv) pequeno (let). Recebe,
+		processa e responde as requisições HTTP.
+
+		HTTP 	->  HTTP é o protocolo responsável pela comunicação de sites na web. 
+		As requisições HTTP são mensagens enviadas pelo cliente para iniciar uma ação no servidor.
+
+		POST 	-> os dados são enviados no corpo da requisição, escondidos da URI. É usado 
+		normalmente para enviar informações.
+ 
+		GET 	-> os dados são enviados no cabeçalho da requisição, podendo ser vistos pela
+		URI. É usado normalmente para obter dados.
+
+		IOC 	-> or Inversion Of Control, é uma forma que temos para manipular o controle
+		sobre um objeto. No caso do projeto realizado no curso, o método main() é quem instanciava
+		os objetos, mas quem realiza esse processo era o Tomcat.
+
+
+
+#### Observações checkIn OT (@Paula Macedo)
+
+1- Se você tiver usando o Eclipse, ao deletar um projeto ou server pode ser que ele ainda permaneça 
+na pasta Workspace e então ao criar um projeto com o mesmo nome ou servidor ele pegue as mesmas 
+configurações do que esta na pasta e você ache estranho que seu projeto ou servidor não mudou . 
+Então não esqueçam de deletar da pasta/ workspace.
+
+2- Se vocês decidirem não usar o workspace e usar um diretório diferente, para importar o projeto 
+o caminho é File> import > existing projects into workspace e escolham sua pasta.
+
+3- A versão mais atual do Tomcat ainda esta em teste então o melhor mesmo é usar o TomCat 9 e a
+versão da Jstl não precisa ser a citada pelo professor no curso, use uma versão compatível com o
+Tomcat 9 , pode ser a do Jakarta EE também, mas lembrando que o caminho dos imports mudaram nas 
+versões do Jakarta EE.
+
+
+#### Observações Antonio Martins
+
+#### Tomcat(puro em java) servidor web java
+
+* HTML
+* HTTP 
+* Gera HTML dinamicamente usando Java e JSP (JSP - Podemos ao invés de utilizar HTML 
+para desenvolver páginas Web estáticas e sem funcionalidade, utilizar o JSP para criar 
+dinamismo. É possível escrever HTML com códigos JSP embutidos.)
+
+#### Requisição 
+	
+* navegador manda a requisição(request) para o servidor tomcat e nos devolve(response) nosso conteudo .html
+	
+### Servlet 
+
+* classe que contém alguma logica algo programavel para retornar uma resposta http
+* Escrever uma classe que tenha um objeto que tenha a logica de ir no banco de dados buscar 
+informações e expor via http em formato dinamico 
+* Uma servlet é um objeto Java que podemos chamar a partir de uma requisição HTTP
+* Para mapear a URL para uma servlet usamos a anotação @WebServlet
+* Uma servlet deve estender a classe HttpServlet e sobrescrever um determinado método
+(por exemplo service)
+* Usamos o RequestDispatcher para chamar um JSP a partir da servlet
+* Obtemos o RequestDispatcher a partir do HttpServletRequest
+* Usamos a requisição para colocar ou pegar um atributo (setAttribute(.., ..) ou getAttribute(..))
+* Servlet é um objeto que podemos chamar atraves do protocolo HTTP(navegador) quem possibilita é 
+o tomcat.
+* podemos mandar um requisição para o tomcat para executar o objeto do servlet 
+* Servlet é um objeto que pode ser acionado por meio de uma requisição do protocolo HTTP 
+obs: quem instancia o objeto é o server tomcat 
+
+### Redirecionamento de fluxo
+
+* O RequestDispatcher delega o fluxo da requisição para qualquer recurso disponível.
+* Pode chamar qualquer recurso acessível pela URL (uma página HTML, CSS, JavaScript, Servlet ou JSP).
+
+### Considerações finais:
+
+* JSP significa Java Server Pages
+* JSP é uma página automaticamente processada pelo Tomcat
+* Para gerar HTML dinamicamente no JSP usamos Scriptlets
+* Um scriptlet <% %> é um código Java dentro do HTML
+* Um scriptlet só funciona em uma página JSP
+* Usamos o RequestDispatcher para chamar um JSP a partir da servlet
+* Obtemos o RequestDispatcher a partir do HttpServletRequest
+* Usamos a requisição para colocar ou pegar um atributo (setAttribute(.., ..) ou getAttribute(..))
+
+______________________________________________________________
+
 2- HTTP: Entendendo a web por baixo dos panos						14h
 
 3- Introdução ao SQL com MySQL: Manipule e consulte dados 			12h
