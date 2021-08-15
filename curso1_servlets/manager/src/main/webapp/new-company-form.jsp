@@ -10,7 +10,8 @@
 </head>
 <body>
 	<form action="${ rootPath }" method="POST">
-		Nome: <input type="text" name="name">
+		Name: <input type="text" name="name">
+		Register Date: <input type="text" name="date">
 		<input type="submit" style=display:block>
 	</form>
 </body>

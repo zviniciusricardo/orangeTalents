@@ -2,6 +2,9 @@ package zup.manager.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,15 +24,26 @@ public class NewCompanyServlet extends HttpServlet {
 		System.out.println("Register a new company");
 		
 		String companyName = request.getParameter("name");
+		String paramRegisterDate = request.getParameter("date");
+		
+		Date registerDate = null;
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
+			registerDate = sdf.parse(paramRegisterDate);
+		} catch (ParseException e) {
+			throw new ServletException(e); // pattern catch and re-throw
+		}
+		
 		var company = new Company();
 		company.setName(companyName);
+		company.setRegisterDate(registerDate);
 		
 		FakeDatabase db = new FakeDatabase();
 		db.add(company);
 		
-		request.setAttribute("company", company);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/new-created-company.jsp");
+		request.setAttribute("company", company.getName());
 		rd.forward(request, response);
 		
 		

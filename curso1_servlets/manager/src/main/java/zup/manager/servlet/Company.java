@@ -1,9 +1,12 @@
 package zup.manager.servlet;
 
+import java.util.Date;
+
 public class Company {
 	
 	private Integer id;
 	private String name;
+	private Date registerDate;
 	
 	public Integer getId() {
 		return id;
@@ -16,6 +19,14 @@ public class Company {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+	
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
 	}
 
 }
