@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Java Standard Taglib</title>
+<title>Companies list</title>
 </head>
 <body>
 
@@ -24,7 +24,8 @@
 			<li>
 			
 			${ company.name } -	<fmt:formatDate value="${ company.registerDate }" pattern="dd/MM/yyy"/> 
-			<a href="/manager/remove-company?id=${ company.id }">del</a>
+			<a href="/manager/show-company?id=${ company.id }">edit</a>
+			<a href="/manager/remove-company?id=${ company.id }">delete</a>
 			
 			</li>
 		</c:forEach>

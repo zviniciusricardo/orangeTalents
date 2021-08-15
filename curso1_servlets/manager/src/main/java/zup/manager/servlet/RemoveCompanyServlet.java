@@ -20,6 +20,8 @@ public class RemoveCompanyServlet extends HttpServlet {
 		var db = new FakeDatabase();
 		db.removeCompany(id);
 		
+		response.sendRedirect("list-companies");
+		
 		
 	}
 

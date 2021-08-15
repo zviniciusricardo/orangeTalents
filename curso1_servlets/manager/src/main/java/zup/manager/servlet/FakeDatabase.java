@@ -1,6 +1,7 @@
 package zup.manager.servlet;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class FakeDatabase {
@@ -28,13 +29,31 @@ public class FakeDatabase {
 		return FakeDatabase.companiesList;
 	}
 
+	/**
+	 * Quando tentamos iterar e modificar um objeto de um ArrayList() ao mesmo
+	 * tempo, recebemos o erro ""java.util.ConcurrentModificationException"" 
+	 * Desse modo, precisamos evitar esse tipo de abordagem, nos utilizando
+	 * da Classe Iterator para nos movimentarmos por uma lista do tipo Collections
+	 */
 	public void removeCompany(Integer id) {
-		for (Company company : companiesList) {
-			if(company.getId() == id) {
-				companiesList.remove(company);
+		Iterator<Company> it = companiesList.iterator();
+		
+		while(it.hasNext()) {
+			Company comp = it.next();
+			if(comp.getId() == id) {
+				it.remove();
 			}
 		}
 		
+	}
+
+	public Company getCompanyById(Integer id) {
+		for (Company comp : companiesList) {
+			if (comp.getId() == id) {
+				return comp;
+			}
+		}
+		return null;
 	}
 
 }
