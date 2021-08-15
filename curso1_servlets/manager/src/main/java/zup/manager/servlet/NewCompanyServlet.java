@@ -3,6 +3,7 @@ package zup.manager.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,9 +27,10 @@ public class NewCompanyServlet extends HttpServlet {
 		FakeDatabase db = new FakeDatabase();
 		db.add(company);
 		
-		PrintWriter out = response.getWriter();
-		out.println("<html><body>Empresa " + companyName + 
-				" cadastrada com sucesso</body></html>");
+		request.setAttribute("company", company);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/new-created-company.jsp");
+		rd.forward(request, response);
 		
 		
 	}

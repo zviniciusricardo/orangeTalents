@@ -9,11 +9,11 @@
 </head>
 <body>
 	
-	<c:if test="${ not empty companiesList }">
-		<h2>A new company ${ companiesList } was created!</h2>
+	<c:if test="${ not empty company }">
+		<h2>A new company ${ company.name } was created!</h2>
 	</c:if>
 	
-	<c:if test="${ empty companiesList }">
+	<c:if test="${ empty company.name }">
 		No company registered!
 	</c:if>
 	
