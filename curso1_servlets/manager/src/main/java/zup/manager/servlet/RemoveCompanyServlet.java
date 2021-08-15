@@ -14,6 +14,11 @@ public class RemoveCompanyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
+		String paramId = request.getParameter("id");
+		Integer id = Integer.valueOf(paramId);
+		
+		var db = new FakeDatabase();
+		db.removeCompany(id);
 		
 		
 	}

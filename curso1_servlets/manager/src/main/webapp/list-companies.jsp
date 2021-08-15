@@ -24,7 +24,7 @@
 			<li>
 			
 			${ company.name } -	<fmt:formatDate value="${ company.registerDate }" pattern="dd/MM/yyy"/> 
-			<a href="/manager/remove-company">del</a>
+			<a href="/manager/remove-company?id=${ company.id }">del</a>
 			
 			</li>
 		</c:forEach>
