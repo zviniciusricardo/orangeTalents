@@ -266,7 +266,26 @@ obs: o RequestDispatcher pode delegar o fluxo da requisição para qualquer recu
 
 ### Redirecionamento Client Side
 
-É quando o servlet é configurado para responder imediatamente o cliente mas passando a responsabilidade pra ele (o Cliente) de fazer uma nova requisição para a página resultante do redirecionamento.
+* É quando o servlet é configurado para responder imediatamente o cliente mas passando a responsabilidade pra ele (o Cliente) de fazer uma nova requisição para a página resultante do redirecionamento.
+
+* Qual o problema de reenviar uma requisição?
+* Qual a diferença entre redirecionamento pelo cliente e servidor?
+
+		obs: para redirecionar pelo navegador usamos o método response.sendRedirect("endereço")
+		o código de resposta para redirecionamento HTTP é 30X (301 ou 302)
+
+### CRUD on Servlets
+
+* Create
+
+
+* Read
+
+
+* Update
+
+
+* Delete
 
 
 ______________________________________________________________

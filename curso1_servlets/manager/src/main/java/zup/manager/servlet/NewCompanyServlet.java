@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+// import javax.servlet.RequestDispatcher; ### using send.Redirect()
 
 @WebServlet(urlPatterns="/new-company")
 public class NewCompanyServlet extends HttpServlet {
@@ -41,9 +40,17 @@ public class NewCompanyServlet extends HttpServlet {
 		FakeDatabase db = new FakeDatabase();
 		db.add(company);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/list-companies");
 		request.setAttribute("company", company.getName());
-		rd.forward(request, response);
+		
+//		usar o redirecionamento para outro servlet ao invés de uma página html/jsp
+//		Client side redirecting
+		response.sendRedirect("list-companies");
+		
+
+//		### modelo antigo de redirecionamento usando o RequestDispatcher ###		
+//		RequestDispatcher rd = request.getRequestDispatcher("/list-companies");
+//		request.setAttribute("company", company.getName());
+//		rd.forward(request, response);
 		
 	}
 

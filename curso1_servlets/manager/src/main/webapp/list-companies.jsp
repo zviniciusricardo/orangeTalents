@@ -23,8 +23,8 @@
 			
 			<li>
 			
-			${ company.name } - 
-			<fmt:formatDate value="${ company.registerDate }" pattern="dd/MM/yyy"/> 
+			${ company.name } -	<fmt:formatDate value="${ company.registerDate }" pattern="dd/MM/yyy"/> 
+			<a href="/manager/remove-company">del</a>
 			
 			</li>
 		</c:forEach>
