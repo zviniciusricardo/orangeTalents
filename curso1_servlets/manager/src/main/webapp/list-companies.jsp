@@ -11,12 +11,22 @@
 <title>Java Standard Taglib</title>
 </head>
 <body>
-	Lista de empresas: <br/>
+
+	<c:if test="${ not empty company }">
+		<h2>The company ${ company } was registered successfully!</h2> <br />
+	</c:if>
+
+	<h2>Companies list:</h2> <br/>
 	
 	<ul> 
 		<c:forEach items="${ companies }" var="company">
 			
-			<li>${ company.name } - <fmt:formatDate value="${ company.registerDate }" pattern="dd/MM/yyy"/> </li>
+			<li>
+			
+			${ company.name } - 
+			<fmt:formatDate value="${ company.registerDate }" pattern="dd/MM/yyy"/> 
+			
+			</li>
 		</c:forEach>
 	</ul>
 	

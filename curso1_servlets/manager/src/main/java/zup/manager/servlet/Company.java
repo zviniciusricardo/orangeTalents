@@ -28,5 +28,4 @@ public class Company {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-
 }

@@ -1,7 +1,6 @@
 package zup.manager.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +17,7 @@ public class NewCompanyServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		System.out.println("Register a new company");
@@ -42,10 +41,9 @@ public class NewCompanyServlet extends HttpServlet {
 		FakeDatabase db = new FakeDatabase();
 		db.add(company);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/new-created-company.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/list-companies");
 		request.setAttribute("company", company.getName());
 		rd.forward(request, response);
-		
 		
 	}
 

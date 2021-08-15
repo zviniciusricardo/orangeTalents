@@ -10,11 +10,11 @@
 <body>
 	
 	<c:if test="${ not empty company }">
-		<h2>A new company ${ company } was created!</h2>
+		<h2>The company ${ company } was registered successfully!</h2>
 	</c:if>
 	
 	<c:if test="${ empty company }">
-		No company registered!
+		The register failed.
 	</c:if>
 	
 </body>

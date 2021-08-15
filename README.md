@@ -253,6 +253,22 @@ JSTL (Java Standarfd Tag Library)
 ### Context Root
 
 Escrever o nome do contexto no arquivo JSP não é uma boa prática, uma vez que ele pode variar e gerar problemas em outras páginas. Para lidarmos com esse fluxo dinâmico, usaremos a biblioteca Taglib, mais especificamente, a tag <c:url />. Nela, inseriremos o atributo value, e, em seguida, iremos inserir um único caminho possível para chegar até o Servlet.
+
+### Dispatcher
+
+Serve para redirecionar um servlet para outro servlet.
+
+Precisa usar o método service ao invés de doGet ou doPost
+
+No servlet que fará o redirecionamento, colocar o endereço do outro Servlet.
+
+obs: o RequestDispatcher pode delegar o fluxo da requisição para qualquer recurso disponível. (html, css, servlet, javaScript, etc).
+
+### Redirecionamento Client Side
+
+É quando o servlet é configurado para responder imediatamente o cliente mas passando a responsabilidade pra ele (o Cliente) de fazer uma nova requisição para a página resultante do redirecionamento.
+
+
 ______________________________________________________________
 
 2- HTTP: Entendendo a web por baixo dos panos						14h
