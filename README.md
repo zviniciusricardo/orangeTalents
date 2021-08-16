@@ -288,6 +288,100 @@ obs: o RequestDispatcher pode delegar o fluxo da requisição para qualquer recu
 * Delete
 
 
+### Deploy
+
+No arquivo de especificação web.xml dentro de WEB-INF
+
+Definir configurações globais e comportamentos
+
+		<welcome-file-list>
+			<welcome-file>index.html<welcome-file>
+		<welcome-file-list>
+		
+		<servlet>
+			<servlet-name>ClassServletName<servlet-name>
+			<servlet-class>br.com.package.servlet.servletClass<servlet-class>
+		<servlet>
+		
+		<servlet-mapping>
+			<servlet-name>ClassServletName<servlet-name>
+			<url-pattern>/some-address<url-pattern>
+		<servlet-mapping>
+		
+* Configurações podem ser feitas de duas formas, uma na @WebServlet e outra via xml.
+* Através da anotação @WebServlet podemos definir mais do que uma URL para chamar o servlet, por exemplo:
+
+		@WebServlet(urlPatterns= {"/listaEmpresas", "/empresas"})
+		public class ListaEmpresasServlet extends HttpServlet {
+					ou
+		<servlet>
+			<servlet-name>LES</servlet-name>
+			<servlet-class>br.com.alura.gerenciador.servlet.ListaEmpresasServlet</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>LES</servlet-name>
+			<url-pattern>/listaEmpresas</url-pattern>
+		</servlet-mapping>
+
+		<servlet-mapping>
+			<servlet-name>LES</servlet-name>
+			<url-pattern>/empresas</url-pattern>
+		</servlet-mapping>
+
+O que aprendemos sobre servlet?
+É um objeto que pode ser invocado via HTTP via Tomcat
+Nossa aplicação não possui um método main
+Quem chama a classe inicializadora é o Tomcat(Servlet Container)
+Tomcat é um middleware
+Tomcat é Lazy loader				
+Quando instanciado o Tomcat deixa o objeto (servlet) em memória
+Só há uma instância de cada servlet (Singletom)
+Um singletom uma vez instanciado, vive pra sempre
+Tomcat usa Inversion of Control
+
+
+Mudando o comportamento Lazy loader:
+
+A anotação @WebServlet possui um atributo loadOnStartup que muda esse comportamento:
+
+		@WebServlet(urlPatterns="/oi", loadOnStartup=1)
+		public class OiMundoServlet extends HttpServlet {
+
+
+			public OiMundoServlet() {
+				System.out.println("Criando Oi Mundo Servlet");
+			}
+
+			@Override
+			protected void service(HttpServletRequest req, HttpServletResponse resp) 
+				throws IOException {
+
+				//implementacao do metodo service omitida
+			}
+		}
+
+Criando um arquivo .war para deploy da aplicação no servidor de produção
+
+WAR é o ZIP de projetos Java Web, que você roda de dentro de um servidor como o Tomcat.
+JAR é o ZIP para projetos comuns, que não são Web.
+
+JAR e WAR são nada mais do que arquivos ZIP, no entanto um WAR possui os arquivos do mundo web
+como imagens, CSS, JS, JSP e HTML.
+
+
+PASSO A PASSO DEPLOY:
+1. Instalar uma nova instância do Tomcat num diretório diferente (ou num servidor, nuvem, domínio, etc)
+2. Criar um arquivo .war do projeto e exportar para o caminho do nosso novo Tomcat
+
+
+
+ASSISTIR NOVAMENTE A ATIVIDADE 9 DA AULA 8 CURSO SERVLETS
+RESPONDER AO QUESTIONÁRIO DE SAÍDA GOOGLE CLASSROOM
+RESPONDER QUESTIONÁRIO DE ENTRADA HTTP
+MANDAR MINHA PERGUNTA PARA A PAULA
+TERMINAR O CURSO DE HTTP EM, NO MÁXIMO, 2 DIAS
+
 ______________________________________________________________
 
 2- HTTP: Entendendo a web por baixo dos panos						14h
