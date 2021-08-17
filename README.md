@@ -482,7 +482,7 @@ Para concatenar mais de um parâmetro na url, usar o "&" (e) comercial e o novo 
 				ou
 		
 		$- curl -v www.caelum.com.br
-		traz informações da requisição + html
+		traz informações da requisição + html no terminal (binários)
 
 Com HTTP-2: 
 * Os bodys (req/resp) são comprimidos por GZIP
