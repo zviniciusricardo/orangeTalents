@@ -386,6 +386,155 @@ ______________________________________________________________
 
 2- HTTP: Entendendo a web por baixo dos panos						14h
 
+> obs:documento rfc do http --> informações oficiais e mais modernas
+
+## O que é HTTP?
+
+* É um protocolo de comunicação web criado para garantir segurança, imutabilidade
+e acessibilidade a qualquer cliente em qualquer servidor, desde que as regras previamente
+estabelecidas de comunicação sejam cumpridas.
+
+* O HTTPS usa criptografia para garantir que o http não seja passado via texto puro(raw text) evitando
+que terceiros interceptem e interpretem a comunicação.
+Ele funciona com um Certificado Digital (TLS/SSL) que possui uma chave digital (ssh publico/privada) que é única.
+* A criptografia é feita com base na chave privada
+* O tipo de criptografia usada é a <b>criptografia assimétrica</b>
+* Os problemas da criptografia assimétrica é o custo de processamento
+* o HTTPS usa ambos os métodos de criptografia, assimétrica e simétrica
+* o cliente gera uma chave simétrica ao vivo
+
+		"No certificado, vem a chave pública para o cliente utilizar, certo? E o servidor continua na posse da chave privada, ok? Isso é seguro, mas lento e por isso o cliente gera uma chave simétrica ao vivo. Uma chave só para ele e o servidor com o qual está se comunicando naquele momento! Essa chave exclusiva (e simétrica) é então enviada para o servidor utilizando a criptografia assimétrica (chave privada e pública) e então é utilizada para o restante da comunicação."
+
+		_http Alura
+		
+<b>A chave simétrica é criptografada com a(s) chave(s) privada e pública? </b>
+
+		HTTPS começa com criptografia assimétrica para depois mudar para criptografia simétrica. 
+		Essa chave simétrica será gerada no início da comunicação e será reaproveitada nas requisições seguintes.
+
+### Domínios e endereços
+
+		$- nslookup google.com
+		
+		// Server:		8.8.8.8
+		// Address:		8.8.8.8#53
+		
+		...
+		// Address: 172.217.29.46
+		
+Domínio = alias do IP
+Servidor DNS = banco de dados com chave/valor dos IP's e domínios
+		
+#### Estrutura de um endereço web
+
+https://cursos.alura.com.br
+
+protocolo + domínio
+
+://cursos.alura.com.br
+
+subdomínio(src) + domínio + tipo domínio + top level domain (root)
+
+
+### Modelo Requisição/Resposta
+
+HTTP Request --> HTTP Response
+requisições http são stateless (não carregam informações anteriores e cada
+requisição é única)
+Servidor usa cookies para lembrar do usuário logado já que a requisição http é stateless
+Spring usa JSESSIONID
+Podemos trafegar qualquer tipo de dado por uma comunicação http. Html, css, imagens, textos, sons...
+
+
+### Análise Request Response
+
+		$- telnet www.caelum.com.br 80 (no terminal)
+		
+		// o telnet estabelece uma conexão TCP (protocolo de rede abaixo do HTTP) e permite que
+		// enviemos dados em cima dessa conexão via terminal.
+		// abre o buffer:
+		// digite: GET / HTTP/1.1 Host: www.caelum.com.br 
+
+	
+### Parâmetros de requisição
+
+Enviar e configurar parâmetros para o servidor de forma estruturada
+
+		https://youtube.com
+		pesquisar por "algum assunto"
+		
+		devolve:
+		https://www.youtube.com/results?search_query=algum+assunto
+		GET 200
+		
+Para concatenar mais de um parâmetro na url, usar o "&" (e) comercial e o novo parâmetro. 
+	
+
+### Metodos HTTP
+
+* GET
+* POST
+* PUT
+* DELETE
+* PATCH
+
+### Dados binários, GZIP Ativo e TLS
+
+		$- curl www.caelum.com.br
+		
+				ou
+		
+		$- curl -v www.caelum.com.br
+		traz informações da requisição + html
+
+Com HTTP-2: 
+* Os bodys (req/resp) são comprimidos por GZIP
+* Os cabeçalhos (req/resp) trafegam em binário + HPACK + TLS
+
+
+		HTTP2(headers request/response) = Binário + HPACK + TLS
+
+> No HTTP 1.1, para melhorar a performance, habilitamos o GZIP no servidor para comprimir 
+os dados das respostas. É uma excelente prática, mas que precisa ser habilitada explicitamente.
+No HTTP/2, o GZIP é padrão e obrigatório.
+
+No header da requisição:
+		Accept-Encoding: gzip, deflate;
+
+
+#### Cabeçalhos Statefull
+
+No HTTP-2 o header não é enviado em todas as requisições. Tendo um context root igual, ele só 
+completará com o restante dos parâmetros da URI como recursos
+O método HTTP é statefull, mas no HTTP-2, o HPACK tem um meio de guardar informação do header de um cliente
+pra nao ficar repetindo informações pela rede e onerar o usuário. (tráfego de menos dados = internet mais rápida)
+
+### HTTP-2 Server-Push
+
+Quando o servidor envia dados ao cliente sem que o mesmo tenha pedido. Apenas um arquivo mas que
+depende de outros recursos pra funcionar. 
+ex: peço uma página html --> vem: css, javascript, um video e um audio, etc...
+(programação reativa? callbacks? eventlisteners?)
+
+### Multiplexing
+
+Antes da conexão HTTP ser iniciada, ocorre uma conexão TCP (protocolo de infra-estrutura)
+conexão TCP é cara. Por isso, ela não ocorre cada vez que uma requisição é feita por um mesmo cliente
+HTTP 1.1 - método Keep-Alive mantém uma conexão TCP ativa por um tempo determinado
+
+HTTP 1.1 mantém de 4 à 8 conexões TCP abertas ao mesmo tempo
+HTTP 2.0 mantém comunicação assíncrona com callbacks e promisses
+
+
+
+#########################################################
+##### CHECKOUT ESTENDIDO NA QUARTA FEIRA			#####
+##### DOJO QUINTA FEIRA À TARDE						#####
+##### flyway API para migrations no Spring (JPA 	#####
+##### e mapeamento de bancos já existentes)			#####
+##### workbench plano de análise de queries - MY SQL#####
+#########################################################
+
 3- Introdução ao SQL com MySQL: Manipule e consulte dados 			12h
 
 4- Consultas SQL: Avançando no SQL com MySQL 						14h
