@@ -130,7 +130,6 @@ Para sair do banco:
 ### Tipos de dados
 
 #### Atributos dos campos numéricos:
-
 		SIGNED ou UNSIGNED - Vai possuir ou não o sinal no numero alterando o armazenamento
 
 		ZEROFILL - Preenche com zeros os espaços:
@@ -143,21 +142,35 @@ Para sair do banco:
 				ERR: OUT OF RANGE.
 
 #### DATAS
-
 		DATE - 1000-01-01 até 9999-12-31
 		DATETIME - 1000-01-01 00:00:00 UTC ATÉ 2038-01-19 UTC
 		TIME - -838:59:59 ATÉ 839:59:59
 		YEAR - 1901 - 2155 (EXPRESSO EM 2 OU 4 DÍGITOS)
+		
+		obs: TimeStamp é mais indicado para trabalhar com fusos horários diferentes. Temos que levar em conta o fuso horario da data para tratarmos de datas em diferentes partes do mundo.
+
+
+#### BLOBS
+		BLOB - binários (podem ser tiny, blob, mediublob, longblob
+		TEXT - texto longo (tiny, mediumtext, longtext)
+		fotos, textos, audios, etc.
+		
+#### ENUMS
+		LISTA PRÉ-DEFINIDA DE VALORES
+		
+#### STRING
+		ATRIBUTOS: SET E COLLATE --> ESPECIFICA CONJUNTO DE CARACTERES E ENCODING
+		OBS: ASCII, UNICODE, UTF-8
+	
+#### ESPACIAL
+		GEOMETRY	|	POINT	|	LINESTRING		POLYGON
+	
 
 
 
+REPRESENTAÇÃO UNIVERSAL DE DATA MYSQL
 
-
-
-
-
-
-
+'1989-10-05'
 
 
 
