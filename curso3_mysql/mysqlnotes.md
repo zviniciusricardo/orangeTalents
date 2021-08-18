@@ -173,7 +173,15 @@ REPRESENTAÇÃO UNIVERSAL DE DATA MYSQL
 '1989-10-05'
 
 
+### Ponto flutuante e filtros
 
+Não é de bom tom usar como filtro as condições > (maior que), < (menor que), >=, <= <> (diferente de) etc...
+
+#### BETWEEN
+		
+		SELECT * FROM tbproduto WHERE PRECO_LISTA BETWEEN 16.007 AND 16.009;
+		
+Especificidade do MySQL, podendo não estar presente em outros DBMS's.
 
 
 
