@@ -209,6 +209,55 @@ Simula um full join --> tabelas diferentes com mesma correspondência de tipos e
 
 tabela x, y
 
+Desafio:
+Contar ocorrências de vendas por cpf(vendedores) maiores que 2000 (duas mil vendas) em 2016
+
+			mysql> SELECT CPF, COUNT(*) FROM notas_fiscais
+				->   WHERE YEAR(DATA_VENDA) = 2016
+				->   GROUP BY CPF
+				->   HAVING COUNT(*) > 2000;
+			+-------------+----------+
+			| CPF         | COUNT(*) |
+			+-------------+----------+
+			| 3623344710  |     2012 |
+			| 492472718   |     2008 |
+			| 50534475787 |     2037 |
+			+-------------+----------+
+
+mysql> select x.cpf, x.contador from(select cpf, count(*) as contador from notas_fiscais
+    -> where year(data_venda) = 2016
+    -> group by cpf) x where x.contador > 2000;
++-------------+----------+
+| cpf         | contador |
++-------------+----------+
+| 3623344710  |     2012 |
+| 492472718   |     2008 |
+| 50534475787 |     2037 |
++-------------+----------+
+
+
+### Views
+
+Salvar uma consulta como uma tabela. Virtualização de tabelas.
+Disponibilizar dados tratados para o cliente.
+
+
+### Funções com datas
+
+SELECT CONCAT('O cliente ', TC.NOME, ' faturou ', 
+CAST(SUM(INF.QUANTIDADE * INF.preco) AS char (20))
+ , ' no ano ', CAST(YEAR(NF.DATA_VENDA) AS char (20))) AS SENTENCA FROM notas_fiscais NF
+INNER JOIN itens_notas_fiscais INF ON NF.NUMERO = INF.NUMERO
+INNER JOIN tabela_de_clientes TC ON NF.CPF = TC.CPF
+WHERE YEAR(DATA_VENDA) = 2016
+GROUP BY TC.NOME, YEAR(DATA_VENDA)
+
+
+
+
+
+
+
 
 
 
