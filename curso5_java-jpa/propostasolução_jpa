@@ -1,0 +1,100 @@
+# Formulário de proposta de solução
+
+Caso você precise carregar uma auto correção e tenha que descobrir o nome 
+do(a) aluno(a) que fez, como você faria? Algum ponto de atenção que deveria ter?
+
+Caso você precise carregar as respostas de um(a) aluno(a) a partir do objeto da 
+classe Aluno, como você faria? Algum ponto de atenção?
+
+
+1) Como modelar a classe aluno no JPA?
+[@Id + GeneratedValue)id, nome, @table(unique)email, @Min(1)@Max(100)idade
+
+- Eu criaria a classe normalmente e anotaria com a @Entity.
+- Como o relacionamento da classe aluno é de um para muitos, anotaria a classe com @OneToMany
+- A chave primaria da classe seria representada por um tipo inteiro e anotada com 
+@Id + @GeneratedValue(strategy = GenerationType.IDENTITY)
+		
+		obs: A anotação @Entity mapeia a classe aluno como objeto de persistência da nossa persistence-unity
+		dessa forma, o JPA cria as tabelas do mundo relacional a partir de atributos e objetos do mundo POO.
+
+
+2) Como modelar a classe avaliação?
+[@Id + GeneratedValue)id, (poderia ser um índice)titulo, descricao, @ManyToOne
+
+- Para modelar a classe avaliacoes, criaremos a classe com os atributos mais os métodos auxiliares
+Ela também seria anotada com @Entity e definiremos as outras notações @Id e @GeneratedValue
+- Não podemos esquecer de adicionar a classe avaliacoes à Persistence Unity no nosso persistence.xml
+- O relacionamento de cada avaliação é de muitos pra um, então @ManyToOne
+- O id seria a chave primária com as duas notações necessárias.
+
+3) Como modelar a classe resposta_avaliacao?
+resposta, nota, aluno_id, avaliacao_id, @ManyToMany(Avaliacao avaliacao), @OneToOne(Aluno aluno)
+
+- A classe RespostaAvaliacao seria um pouco diferente.
+- O relacionamento dela é de muitos pra um e muitos pra muitos e além dos métodos assinados
+com as notações de costume, carregará um atributo do tipo Avaliacao avaliacao e outro Aluno aluno
+
+4) Como modelar a classe correcao_resposta?
+id, resposta_corrigida, @ManyToOne resposta_id, @Min(1)@Max(10)nota, RespostaAvaliacao respostaAvaliacao
+A classe correcao_resposta terá relacionamento de muitos pra um e terá algumas constraints
+em relação ao range da nota que será dada.
+
+
+Observações Gerais
+Toda classe precisa de um construtor vazio que será usado pelo JPA. Esse construtor existe
+com o mero propósito de inversão de controle e de dependência e serão anotadas com @Deprecated
+
+
+5.0) Quais são os passos para salvar um(a) aluno(a)?
+5.1) Quais são os passos para salvar uma avaliação?
+5.2) Quais são os passos para salvar uma resposta de um(a) aluno(a)?
+5.3) Quais são os passos para salvar a auto correção de um(a) aluno(a)?
+
+
+Para qualquer operação simples usando o JPA, precisaremos seguir passos repetidos
+Instanciar um entityManagerFactory através da classe Persistence indicando a nossa persist unity
+Criar uma instância de entity manager e iniciar uma transação.
+
+Toda ação que resulte em criação e mudança de dados precisa ser feita em forma managed pelo JPA e pela
+entityManager.
+Se operações do tipo GET forem realizadas, elas não precisam estar em estado managed(detached).
+
+Os métodos usados são os nativos do JPA specification:
+save, find, delete e list(findAll).
+Temos que nos atentar ao fato de algumas classes serem do tipo @transient e serem dependentes de uma
+classe pai. Dessa forma, temos que anotar a classe como @Transient. 
+
+________________________________________________________________________________________________
+
+## Resposta do Especialista
+
+Peso 0.25: Mapeamento simples para as classes Aluno e Avaliação
+Peso 1: Mapeamento como @ManyToOne para as classes Resposta e AutoCorrecao
+Peso 0.25: Criação de EntityManagerFactory, EntityManager e chamada do persist para salvar um objeto do tipo Aluno
+Peso 0.25: Criação/Reaproveitamento de EntityManagerFactory, EntityManager e chamada do persist para salvar um objeto do tipo Avaliação
+Peso 2: Criação/Reaproveitamento de EntityManagerFactory, EntityManager, carregamento do aluno, da avaliação e posterior persist da resposta
+Peso 2: Criação/Reaproveitamento de EntityManagerFactory, EntityManager, carregamento da resposta e posterior persist da auto correção.
+Peso 2.25: Carregamento da auto correção e navegação até o nome do(a) aluno(a) tomando cuidado com o lazy load
+Peso 2: Carregamento de todas respostas de um(a) aluno(a) via query a partir de um(a) determinado(a) aluno(a).
+
+
+Crio a classe Aluno, adiciono os atributos necessários e também adiciono um id. Adiciono o Id para mapear como chave primária para o banco de dados.
+Mapeio a classe Aluno para ser entendida pelo HIbernate. Uso o @Entity em cima da classe e o @Id em cima do atributo id. Poderia colocar também o @Id no email. A @Entity explica para o Hibernate que aquela classe vai ser uma tabela no banco e o @Id explica que aquele atributo vai ser a chave primaria na tabela. Os outros atributos eu não preciso mapear pq ele já vai mapear para colunas do mesmo nome.
+Crio a classe Avaliacao, adiciono os atributos necessários e também adiciono um id.
+Mapeio a classe Avaliacao para ser entendida pelo HIbernate. Uso o @Entity em cima da classe e o @Id em cima do atributo id.
+
+Crio a classe Respota, adiciono os atributos necessários. Um dos atributos aqui é do tipo Avaliação para fazer o link, além do atributo do tipo Aluno. Além disso adiciono o id. Uso o atributo do tipo Avaliacao e Aluno para manter o domínio rico e tirar proveito do ORM.
+Mapeio a classe Resposta para ser entendida pelo HIbernate. Uso o @Entity em cima da classe e o @Id em cima do atributo id. Além disso preciso usar o @ManyToOne em cima do atributo que representa a Avaliacao, assim como no atributo Aluno. Dessa forma o Hibernate vai entender que tal atributo precisa ser mapeado como chave estrangeira na tabela.
+Crio a classe AutoAvaliacao e adiciono os atributos necessários. Um dos atributos é do tipo Resposta, já que a autoavaliação é relativa a resposta que o(a) próprio(a) aluno(a) deu.  Além disso adiciono o id  como atributo extra para ser chave primária.
+Mapeio a classe AutoAvaliacao para ser entendida pelo HIbernate. Uso o @Entity em cima da classe e o @Id em cima do atributo id. Além disso preciso usar o @ManyToOne em cima do atributo que representa a Resposta. Dessa forma o Hibernate vai entender que tal atributo precisa ser mapeado como chave estrangeira na tabela.
+
+Para salvar um aluno eu crio um EntityManagerFactory, construo um EntityManager, crio o objeto do tipo Aluno, abro uma transação, invoco o método persist e faço um commit. Preciso da EMF porque ela é a fábrica de EM. O EM representa a ideia de conexão com o banco de dados.
+Para salvar uma avaliacao eu crio um EntityManagerFactory, construo um EntityManager, crio o objeto do tipo Avaliacao, abro uma transação, invoco o método persist e faço um commit. Preciso da EMF porque ela é a fábrica de EM. O EM representa a ideia de conexão com o banco de dados.
+Para salvar uma resposta eu crio um EntityManagerFactory, construo um EntityManager, carrego o objeto do tipo Avaliacao, carrego o objeto do tipo Aluno, crio o objeto do tipo Reposta, abro uma transação, invoco o método persist e faço um commit. Preciso da EMF porque ela é a fábrica de EM. O EM representa a ideia de conexão com o banco de dados. Preciso carregar os objetos do tipo Aluno e Avaliacao para construir o vínculo com a Resposta.
+Para salvar uma auto correcao eu crio um EntityManagerFactory, construo um EntityManager, carrego o objeto do tipo Resposta, crio o objeto do tipo AutoCorrecao, abro uma transação, invoco o método persist e faço um commit. Preciso da EMF porque ela é a fábrica de EM. O EM representa a ideia de conexão com o banco de dados. Preciso carregar o objeto do tipo Resposta para fazer o vínculo com a AutoCorrecao.
+Para descobrir o nome do(a) aluno(a) a partir da AutoCorrecao eu preciso navegar pelos relacionamentos @ManyToOne até chegar onde preciso. Isso pode ser feito através de métodos getters ou posso criar um método na AutoCorrecao que já me retorne o aluno em questão.
+Para descobrir as respostas do aluno a partir do objeto do tipo Aluno é necessário fazer uma query planejada usando a JPQL ou navegar por relacionamentos. A ideia é realizar uma query sobre os objetos do tipo Resposta buscando todas que sejam daquele determinado(a) aluno(a). Algo como select r from Resposta r where r.aluno =:aluno .
+
+
+
