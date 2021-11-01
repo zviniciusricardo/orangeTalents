@@ -111,4 +111,4 @@ select (sum(ment.nota) / count(ment.nota)) as media_por_curso from resposta_ment
 inner join respostas_avaliacoes respav
 on ment.resposta_id = respav.id
 group by respav.avaliacao_id 
-order by avaliacao_id asc;
+order by avaliacao_id asc;pais

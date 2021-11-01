@@ -1,4 +1,4 @@
-# Spring Boot APU REST:
+# Spring Boot API REST:
 
 Um resumo da história e evolução do Spring;
 Que, para criar um projeto com Spring Boot, utilizamos o Spring Initialzr, através do site https://start.spring.io;
